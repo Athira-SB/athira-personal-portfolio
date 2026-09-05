@@ -8,7 +8,9 @@ import HubSpot from '../assets/images/HubSpot.png'
 import Mailchimp from '../assets/images/Mailchim.png'
 import Canva from '../assets/images/canva.png'
 import WordPress from '../assets/images/Wordpress.png'
-
+import LovableAI from '../assets/images/LovableAI.png'
+import ChatGPT from '../assets/images/ChatGPT.png'
+import GoogleGemini from '../assets/images/GoogleGemini.png'
 
 const Tools = () => {
   const { isDark } = useTheme();
@@ -23,6 +25,9 @@ const Tools = () => {
     { name: 'Mailchimp', emoji: Mailchimp },
     { name: 'Canva', emoji: Canva },
     { name: 'WordPress', emoji: WordPress },
+    { name: 'Lovable AI', emoji: LovableAI },
+    { name: 'ChatGPT', emoji: ChatGPT },
+    { name: 'Google Gemini', emoji: GoogleGemini },
   ];
 
   return (
