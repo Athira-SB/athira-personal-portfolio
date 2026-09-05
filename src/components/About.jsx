@@ -1,5 +1,5 @@
 import { useTheme } from '../context/ThemeContext';
-import Aboutimg from '../assets/images/about.jpg';
+import Aboutimg from '../assets/images/about.jpeg';
 const About = () => {
   const { isDark } = useTheme();
 
