@@ -1,18 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
 import { useTheme } from '../context/ThemeContext';
+
+const navLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' }, 
+  { label: 'Courses', href: '#courses' },
+  { label: 'Services', href: '#services' },
+  { label: 'Case Studies', href: '#case-studies' },
+  { label: 'Contact', href: '#contact' },
+];
 
 const Navbar = () => {
   const { isDark } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
-  const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Services', href: '#services' },
-    { label: 'Case Studies', href: '#case-studies' },
-    { label: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const currentPosition = window.scrollY + 120;
+      let currentSection = 'home';
+
+      navLinks.forEach((link) => {
+        const section = document.querySelector(link.href);
+
+        if (section && section.offsetTop <= currentPosition) {
+          currentSection = link.href.slice(1);
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+
+    return () => window.removeEventListener('scroll', updateActiveSection);
+  }, []);
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 backdrop-blur-md animate-slide-down ${
@@ -34,11 +59,22 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className={`font-medium transition-all duration-300 hover:opacity-70 ${
-                  isDark ? 'text-white' : 'text-slate-900'
-                }`}
+                className={`relative font-medium transition-all duration-300 hover:opacity-70 ${
+                  activeSection === link.href.slice(1) ? 'opacity-100' : 'opacity-80'
+                } ${isDark ? 'text-white' : 'text-slate-900'}`}
+                style={activeSection === link.href.slice(1) ? {
+                  color: `rgb(var(--color-primary))`
+                } : undefined}
+                aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
               >
                 {link.label}
+                {activeSection === link.href.slice(1) && (
+                  <span
+                    className="absolute -bottom-2 left-0 right-0 h-0.5 rounded-full"
+                    style={{ backgroundColor: `rgb(var(--color-primary))` }}
+                    aria-hidden="true"
+                  />
+                )}
               </a>
             ))}
           </div>
@@ -72,9 +108,19 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className={`block px-4 py-2 font-medium transition-all duration-300 hover:bg-opacity-50 ${
+                className={`block border-l-2 px-4 py-2 font-medium transition-all duration-300 hover:bg-opacity-50 ${
+                  activeSection === link.href.slice(1)
+                    ? 'bg-opacity-10'
+                    : 'border-transparent'
+                } ${
                   isDark ? 'text-white hover:bg-slate-800' : 'text-slate-900 hover:bg-slate-100'
                 }`}
+                style={activeSection === link.href.slice(1) ? {
+                  color: `rgb(var(--color-primary))`,
+                  borderLeftColor: `rgb(var(--color-primary))`,
+                  backgroundColor: `rgba(var(--color-primary), 0.1)`
+                } : undefined}
+                aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
