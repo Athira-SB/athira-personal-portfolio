@@ -1,5 +1,5 @@
 import { useTheme } from '../context/ThemeContext';
-import Profile from '../assets/images/profile.jpg';
+import Profile from '../assets/images/profile.jpeg';
 const Hero = () => {
   const { isDark } = useTheme();
 
