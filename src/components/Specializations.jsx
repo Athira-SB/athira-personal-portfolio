@@ -3,14 +3,15 @@ import { useTheme } from '../context/ThemeContext';
 const Specializations = () => {
   const { isDark } = useTheme();
 
-  const specializations = [
-    { title: 'Performance Marketing', icon: '📊' },
-    { title: 'SEO & Organic Growth', icon: '🔍' },
-    { title: 'Social Media Strategy', icon: '📱' },
-    { title: 'Lead Generation', icon: '🎯' },
-    { title: 'Conversion Rate Optimization (CRO)', icon: '💹' },
-    { title: 'Email Marketing Automation', icon: '📧' },
-  ];
+const specializations = [
+  { title: 'SEO & Organic Growth', icon: '🔍' },
+  { title: 'Lead Generation', icon: '🎯' },
+  { title: 'Content Creation', icon: '✍️' },
+  { title: 'Campaign Coordination', icon: '📢' },
+  { title: 'Social Media Management', icon: '📲' },
+  { title: 'Performance Monitoring', icon: '📈' },
+  { title: 'Email Marketing', icon: '📧' },
+];
 
   return (
     <section 
