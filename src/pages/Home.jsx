@@ -1,8 +1,10 @@
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
+import Experience from '../components/Experience';
 import Specializations from '../components/Specializations';
 import Services from '../components/Services';
+import Course from '../components/Course';
 import Tools from '../components/Tools';
 import CaseStudies from '../components/CaseStudies';
 import Campaigns from '../components/Campaigns';
@@ -19,8 +21,10 @@ const Home = () => {
       <main>
         <Hero />
         <About />
+        <Experience />
+        <Course />
+        <Services />    
         <Specializations />
-        <Services />
         <Tools />
         <CaseStudies />
         <Campaigns />
