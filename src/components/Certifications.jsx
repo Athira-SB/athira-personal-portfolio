@@ -102,7 +102,7 @@ const Certifications = () => {
           <div className={`text-center p-8 rounded-xl transition-all duration-300 ${
             isDark ? 'bg-slate-900' : 'bg-slate-100'
           }`}>
-            <p className="text-4xl font-bold" style={{ color: `rgb(var(--color-primary))` }}>4</p>
+            <p className="text-4xl font-bold" style={{ color: `rgb(var(--color-primary))` }}>5</p>
             <p className={`mt-2 font-semibold transition-all duration-300 ${
               isDark ? 'text-slate-300' : 'text-slate-700'
             }`}>Industry Certifications</p>
@@ -125,6 +125,7 @@ const Certifications = () => {
           </div>
         </div>
       </div>
+
     </section>
   );
 };
