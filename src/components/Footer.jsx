@@ -1,14 +1,36 @@
 import { useTheme } from '../context/ThemeContext';
+import { useEffect, useState } from 'react';
 import facebook from '../assets/images/fb.png';
 import youtube from '../assets/images/YT.png';
 import instagram from '../assets/images/insta.png';
+import mail from '../assets/images/mail.png';
+import website from '../assets/images/website.png';
+import linkedin from '../assets/images/linkedinLogo.png';
 const Footer = () => {
   const { isDark } = useTheme();
   const currentYear = new Date().getFullYear();
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const footerLinks = [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Courses', href: '#courses' },
     { label: 'Services', href: '#services' },
     { label: 'Case Studies', href: '#case-studies' },
     { label: 'Contact', href: '#contact' },
@@ -34,7 +56,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="text-white font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
               {footerLinks.map((link) => (
                 <li key={link.label}>
                   <a
@@ -48,23 +70,24 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Reach Me */}
           <div>
-            <h4 className="text-white font-bold mb-4">Services</h4>
+            <h4 className="text-white font-bold mb-4">Reach Me</h4>
             <ul className="space-y-2">
               {[
-                'SEO & Organic Growth',
-                'Paid Advertising',
-                'Social Media Marketing',
-                'Content Marketing',
-                'Email Marketing'
-              ].map((service) => (
-                <li key={service}>
+                { label: 'Mail', value: 'athirasb2026@gmail.com', icon: mail, href: 'mailto:athirasb2026@gmail.com' },
+                { label: 'Website', value: 'Portfolio Website', icon: website, href: 'https://athira-sb-personal-portfolio.vercel.app/' },
+                { label: 'LinkedIn', value: 'LinkedIn Profile', icon: linkedin, href: 'https://www.linkedin.com/in/athirasb/' },
+              ].map((contact) => (
+                <li key={contact.label}>
                   <a
-                    href="#services"
-                    className="text-slate-400 text-sm transition-all duration-300 hover:text-white"
+                    href={contact.href}
+                    className="flex items-center gap-3 text-slate-400 text-sm transition-all duration-300 hover:text-white"
+                    target={contact.href.startsWith('http') ? '_blank' : undefined}
+                    rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   >
-                    {service}
+                    <img src={contact.icon} alt="" className="h-6 w-6 object-contain" />
+                    <span>{contact.value}</span>
                   </a>
                 </li>
               ))}
@@ -108,15 +131,19 @@ const Footer = () => {
           </div>
 
           {/* Back to Top */}
-          <a
-            href="#home"
-            className={`flex items-center gap-1 text-slate-400 transition-all duration-300 hover:text-white group`}
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className={`fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full p-0 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+              showBackToTop ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+            }`}
+            style={{ backgroundColor: `rgb(var(--color-primary))` }}
+            aria-label="Back to top"
           >
-            <span>Back to Top</span>
-            <svg className="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
             </svg>
-          </a>
+          </button>
         </div>
       </div>
     </footer>
