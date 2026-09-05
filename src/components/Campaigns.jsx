@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import GoogleAds from '../assets/images/Google Ads.png'
 import MetaAds from '../assets/images/Meta Ads.png'
@@ -8,6 +9,18 @@ import Youtube from '../assets/images/Youtube.png'
 
 const Campaigns = () => {
   const { isDark } = useTheme();
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setSelectedCampaign(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const campaigns = [
     {
@@ -15,7 +28,7 @@ const Campaigns = () => {
       name: 'Google Ads',
       icon: '🔍',
       image: GoogleAds,
-      link: 'https://ads.google.com/aw/ads?campaignId=23490663740&adGroupId=190407178445&ocid=7633911253&workspaceId=0&euid=1501671312&__u=5013103888&uscid=7633911253&__c=3308818797&authuser=2&subid=in-en-ha-awa-bk-c-c00%21o3-ahpm-0000000200-0000000002%7C-ahpm-0000000179-0000000001~CjwKCAjwjtTNBhB0EiwAuswYhtAdTJtZZE3RgvX7oP9DoGzqi0cxZjnHgGN8hCrn50a7NvAmWw2jbxoCa2AQAvD_BwE~140706620052~aud-2277743709984%3Akwd-94527731~16862088904~592470418766',
+      link: '',
       description: 'Optimized search campaigns for maximum ROI'
     },
     {
@@ -23,7 +36,7 @@ const Campaigns = () => {
       name: 'Meta Ads',
       icon: '📱',
       image: MetaAds,
-      link: 'https://adsmanager.facebook.com/adsmanager/manage/campaigns?act=2566962157014323&nav_entry_point=comet_bookmark&nav_source=comet',
+      link: '',
       description: 'Engaging social media campaigns across Meta platforms'
     },
     {
@@ -74,13 +87,25 @@ const Campaigns = () => {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {campaigns.map((campaign, index) => (
-            <a
+          {campaigns.map((campaign, index) => {
+            const CampaignCard = campaign.link ? 'a' : 'button';
+            const cardProps = campaign.link
+              ? {
+                href: campaign.link,
+                target: '_blank',
+                rel: 'noopener noreferrer'
+              }
+              : {
+                type: 'button',
+                onClick: () => setSelectedCampaign(campaign),
+                'aria-label': `View ${campaign.name} campaign image`
+              };
+
+            return (
+            <CampaignCard
               key={campaign.id}
-              href={campaign.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 animate-slide-up ${
+              {...cardProps}
+              className={`group w-full text-left rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 animate-slide-up ${
                 isDark ? 'bg-slate-900' : 'bg-slate-100'
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
@@ -125,10 +150,40 @@ const Campaigns = () => {
                   </svg>
                 </div>
               </div>
-            </a>
-          ))}
+            </CampaignCard>
+            );
+          })}
         </div>
       </div>
+
+      {selectedCampaign && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedCampaign.name}
+          onClick={() => setSelectedCampaign(null)}
+        >
+          <div
+            className="relative max-h-full max-w-5xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={selectedCampaign.image}
+              alt={selectedCampaign.name}
+              className="max-h-[85vh] max-w-full rounded-lg object-contain shadow-2xl"
+            />
+            <button
+              type="button"
+              onClick={() => setSelectedCampaign(null)}
+              className="absolute -right-3 -top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-2xl leading-none text-slate-900 shadow-lg transition-transform duration-300 hover:scale-110"
+              aria-label="Close campaign preview"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
