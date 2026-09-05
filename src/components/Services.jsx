@@ -5,68 +5,152 @@ const Services = () => {
   const { isDark } = useTheme();
   const [expandedService, setExpandedService] = useState(null);
 
-  const services = [
-    {
-      id: 1,
-      title: 'Search Engine Optimization (SEO)',
-      icon: '🔍',
-      features: [
-        'Keyword research & competitor analysis',
-        'On-page & technical SEO',
-        'Link-building strategies',
-        'SEO audits',
-        'Content optimization'
-      ]
-    },
-    {
-      id: 2,
-      title: 'Paid Advertising (PPC)',
-      icon: '💰',
-      features: [
-        'Google Ads & Meta Ads campaign setup',
-        'A/B testing & optimization',
-        'Funnel strategy',
-        'Retargeting campaigns',
-        'Budget optimization'
-      ]
-    },
-    {
-      id: 3,
-      title: 'Social Media Marketing',
-      icon: '📱',
-      features: [
-        'Strategy development',
-        'Content planning & scheduling',
-        'Community management',
-        'Influencer collaboration',
-        'Analytics & reporting'
-      ]
-    },
-    {
-      id: 4,
-      title: 'Content Marketing',
-      icon: '✍️',
-      features: [
-        'Blog strategy',
-        'SEO-driven content',
-        'Lead magnets',
-        'Website copywriting',
-        'Landing page optimization'
-      ]
-    },
-    {
-      id: 5,
-      title: 'Email Marketing',
-      icon: '📧',
-      features: [
-        'Email automation',
-        'Newsletter campaigns',
-        'Funnel building',
-        'CRM integration',
-        'Performance tracking'
-      ]
-    },
-  ];
+const services = [
+  {
+    id: 1,
+    title: 'Blog',
+    icon: '📝',
+    features: [
+      'SEO-friendly blog writing',
+      'Topic research & content planning',
+      'Industry-specific articles',
+      'Keyword-focused content',
+      'Content editing & optimization'
+    ]
+  },
+  {
+    id: 2,
+    title: 'Poster',
+    icon: '🖼️',
+    features: [
+      'Creative poster designs',
+      'Promotional & marketing posters',
+      'Social media posters',
+      'Event & announcement designs',
+      'Custom brand-focused layouts'
+    ]
+  },
+  {
+    id: 3,
+    title: 'Reels',
+    icon: '🎬',
+    features: [
+      'Short-form video content',
+      'Instagram & social media reels',
+      'Creative concepts & scripting',
+      'Video editing & transitions',
+      'Trending content formats'
+    ]
+  },
+  {
+    id: 4,
+    title: 'Banner',
+    icon: '🖥️',
+    features: [
+      'Website banner designs',
+      'Social media cover banners',
+      'Promotional banners',
+      'Campaign-specific creatives',
+      'Responsive digital designs'
+    ]
+  },
+  {
+    id: 5,
+    title: 'AI Videos',
+    icon: '🤖',
+    features: [
+      'AI-powered video creation',
+      'AI voiceovers & narration',
+      'AI-generated visuals',
+      'Promotional & explainer videos',
+      'Social media video content'
+    ]
+  },
+  {
+    id: 6,
+    title: 'Catalogue',
+    icon: '📖',
+    features: [
+      'Product catalogue design',
+      'Digital & printable catalogues',
+      'Product presentation layouts',
+      'Brand-focused visual design',
+      'Product information organization'
+    ]
+  },
+  {
+    id: 7,
+    title: 'Brochure',
+    icon: '📄',
+    features: [
+      'Corporate brochure design',
+      'Product & service brochures',
+      'Company profile brochures',
+      'Print & digital formats',
+      'Professional visual layouts'
+    ]
+  },
+  {
+    id: 8,
+    title: 'SEO Services',
+    icon: '🔍',
+    features: [
+      'Keyword research & analysis',
+      'On-page SEO optimization',
+      'Technical SEO',
+      'Content optimization',
+      'SEO performance monitoring'
+    ]
+  },
+  {
+    id: 9,
+    title: 'Social Media Marketing',
+    icon: '📱',
+    features: [
+      'Social media strategy',
+      'Content planning & scheduling',
+      'Social media management',
+      'Audience engagement',
+      'Analytics & performance monitoring'
+    ]
+  },
+  {
+    id: 10,
+    title: 'Website Development',
+    icon: '💻',
+    features: [
+      'WordPress website design & development',
+    'Custom themes & responsive layouts',
+    'Business, portfolio & service websites',
+    'Plugin installation & customization',
+    'Website maintenance & performance optimization'
+    ]
+  },
+  {
+    id: 11,
+    title: 'Content Marketing',
+    icon: '✍️',
+    features: [
+      'Content strategy & planning',
+      'Website content creation',
+      'Social media content',
+      'SEO-driven content',
+      'Content performance monitoring'
+    ]
+  },
+  {
+    id: 12,
+    title: 'Branding & Creative Design',
+    icon: '🎨',
+    features: [
+      'Brand identity design',
+      'Logo & visual identity',
+      'Brand guidelines',
+      'Creative marketing materials',
+      'Consistent brand communication'
+    ]
+  }
+];
 
   return (
     <section 
